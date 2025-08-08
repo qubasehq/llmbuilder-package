@@ -18,6 +18,9 @@ try:
     HAS_TOKENIZERS = True
 except ImportError:
     HAS_TOKENIZERS = False
+    # Create a dummy Tokenizer class for type hints
+    class Tokenizer:
+        pass
 
 try:
     from transformers import AutoTokenizer

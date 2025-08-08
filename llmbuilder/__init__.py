@@ -10,12 +10,13 @@ This package provides a modular approach to language model development with supp
 - Model export in various formats
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.1"
 __author__ = "Qubase"
 __email__ = "contact@qubase.in"
 
 # Lazy import machinery to keep import time low
-from typing import Optional, Any
+from typing import Optional, Any, Union, List, Dict
+from pathlib import Path
 import importlib
 
 # Main API exports for easy access
@@ -35,14 +36,12 @@ __all__ = [
     "inference",
     "export",
     "utils",
+    "pipeline",
     
-    # Convenience functions (to be implemented)
-    "load_config",
-    "build_model",
-    "train_model",
+    # High-level API
+    "train",
     "generate_text",
     "interactive_cli",
-    "finetune_model",
 ]
 
 # Lazy-load submodules on first attribute access (PEP 562)
@@ -79,6 +78,39 @@ def train_model(model: Any, dataset: Any, config: Any) -> Any:
     from .training import train_model as _train_model
     return _train_model(model, dataset, config)
 
+def train(
+    data_path: Union[str, Path, List[Union[str, Path]]],
+    output_dir: Union[str, Path],
+    config: Optional[Dict[str, Any]] = None,
+    clean: bool = False
+) -> 'TrainingPipeline':
+    """
+    High-level training function that handles the complete training pipeline.
+    
+    Args:
+        data_path: Path to input data file(s) or directory
+        output_dir: Directory to save outputs (tokenizer, checkpoints, etc.)
+        config: Optional configuration dictionary
+        clean: If True, clean up previous outputs before starting
+        
+    Returns:
+        TrainingPipeline: The trained pipeline instance
+        
+    Example:
+        >>> import llmbuilder
+        >>> 
+        >>> # Train with default settings
+        >>> pipeline = llmbuilder.train(
+        ...     data_path="./my_data/",
+        ...     output_dir="./output/"
+        ... )
+        >>> 
+        >>> # Generate text after training
+        >>> text = pipeline.generate("The future of AI is")
+    """
+    from .pipeline import train as _train
+    return _train(data_path, output_dir, config or {}, clean)
+
 def generate_text(model_path: str, tokenizer_path: str, prompt: str, **kwargs: Any) -> str:
     """
     Generate text using a trained model.
@@ -93,18 +125,20 @@ def generate_text(model_path: str, tokenizer_path: str, prompt: str, **kwargs: A
         Generated text string
         
     Example:
+        >>> import llmbuilder
+        >>> 
         >>> text = llmbuilder.generate_text(
-        ...     model_path="model.pt",
-        ...     tokenizer_path="tokenizer/",
-        ...     prompt="Hello world",
-        ...     max_new_tokens=50,
+        ...     model_path="./output/checkpoints/model.pt",
+        ...     tokenizer_path="./output/tokenizer/",
+        ...     prompt="The future of AI is",
+        ...     max_new_tokens=100,
         ...     temperature=0.8
         ... )
     """
     from .inference import generate_text as _generate_text
     return _generate_text(model_path, tokenizer_path, prompt, **kwargs)
 
-def interactive_cli(model_path: str, tokenizer_path: str, **kwargs: Any) -> Any:
+def interactive_cli(model_path: str, tokenizer_path: str, **kwargs: Any) -> None:
     """
     Start an interactive CLI for text generation.
     
@@ -114,13 +148,16 @@ def interactive_cli(model_path: str, tokenizer_path: str, **kwargs: Any) -> Any:
         **kwargs: Additional configuration parameters
         
     Example:
+        >>> import llmbuilder
+        >>> 
         >>> llmbuilder.interactive_cli(
-        ...     model_path="model.pt",
-        ...     tokenizer_path="tokenizer/"
+        ...     model_path="./output/checkpoints/model.pt",
+        ...     tokenizer_path="./output/tokenizer/",
+        ...     temperature=0.8
         ... )
     """
     from .inference import interactive_cli as _interactive_cli
-    return _interactive_cli(model_path, tokenizer_path, **kwargs)
+    _interactive_cli(model_path, tokenizer_path, **kwargs)
 
 def finetune_model(model: Any, dataset: Any, config: Any, **kwargs: Any) -> Any:
     """Fine-tune a model with the given dataset and configuration."""

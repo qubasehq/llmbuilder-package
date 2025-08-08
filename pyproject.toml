@@ -28,13 +28,21 @@ classifiers = [
 requires-python = ">=3.8"
 keywords = ["llm", "language model", "transformer", "training", "fine-tuning", "nlp", "ai", "machine learning"]
 
-# Keep base dependencies light to reduce install friction and import time.
-# Torch is intentionally NOT listed to avoid pulling GPU wheels by default; instruct users in README.
+# Core dependencies required for llmbuilder to function properly
 dependencies = [
   "numpy>=1.21",
   "tqdm>=4.64",
   "loguru>=0.6.0",
   "click>=8.0",
+  "PyYAML>=6.0",
+  "tokenizers>=0.13.0",
+  "transformers>=4.20.0",
+  "torch>=1.12.0",
+  "sentencepiece>=0.1.97",
+  "huggingface-hub>=0.10.0",
+  "safetensors>=0.3.0",
+  "jinja2>=3.0.0",
+  "packaging>=21.0",
 ]
 
 [project.urls]

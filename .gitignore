@@ -92,3 +92,5 @@ tests/
 # If you're using mypy or pyright
 .mypy_cache/
 .pyrightcache/
+
+basic_example/

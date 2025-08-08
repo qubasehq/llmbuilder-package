@@ -2,6 +2,77 @@
 
 A modular toolkit for building, training, fine-tuning, generating, and exporting GPT-style language models with CPU-friendly defaults.
 
+## About LLMBuilder Framework
+
+**LLMBuilder** is a production-ready framework for training and fine-tuning Large Language Models (LLMs) — not a model itself. Designed for developers, researchers, and AI engineers, LLMBuilder provides a full pipeline to go from raw text data to deployable, optimized LLMs, all running locally on CPUs or GPUs.
+
+### Complete Framework Structure
+
+The full LLMBuilder framework includes:
+
+```
+LLMBuilder/
+├── data/                   # Data directories
+│   ├── raw/               # Raw input files (.txt, .pdf, .docx)
+│   ├── cleaned/           # Processed text files
+│   └── tokens/            # Tokenized datasets
+│   ├── download_data.py   # Script to download datasets
+│   └── SOURCES.md         # Data sources documentation
+│
+├── debug_scripts/         # Debugging utilities
+│   ├── debug_loader.py    # Data loading debugger
+│   ├── debug_training.py  # Training process debugger
+│   └── debug_timestamps.py # Timing analysis
+│
+├── eval/                  # Model evaluation
+│   └── eval.py           # Evaluation scripts
+│
+├── exports/               # Output directories
+│   ├── checkpoints/      # Training checkpoints
+│   ├── gguf/             # GGUF model exports
+│   ├── onnx/             # ONNX model exports
+│   └── tokenizer/        # Saved tokenizer files
+│
+├── finetune/             # Fine-tuning scripts
+│   ├── finetune.py      # Fine-tuning implementation
+│   └── __init__.py      # Package initialization
+│
+├── logs/                 # Training and evaluation logs
+│
+├── model/                # Model architecture
+│   └── gpt_model.py     # GPT model implementation
+│
+├── tools/                # Utility scripts
+│   ├── analyze_data.ps1  # PowerShell data analysis
+│   ├── analyze_data.sh   # Bash data analysis
+│   ├── download_hf_model.py # HuggingFace model downloader
+│   └── export_gguf.py    # GGUF export utility
+│
+├── training/             # Training pipeline
+│   ├── dataset.py       # Dataset handling
+│   ├── preprocess.py    # Data preprocessing
+│   ├── quantization.py  # Model quantization
+│   ├── train.py         # Main training script
+│   ├── train_tokenizer.py # Tokenizer training
+│   └── utils.py         # Training utilities
+│
+├── .gitignore           # Git ignore rules
+├── config.json          # Main configuration
+├── config_cpu_small.json # Small CPU config
+├── config_gpu.json      # GPU configuration
+├── inference.py         # Inference script
+├── quantize_model.py    # Model quantization
+├── README.md           # Documentation
+├── requirements.txt    # Python dependencies
+├── run.ps1            # PowerShell runner
+└── run.sh             # Bash runner
+```
+
+🔗 **Full Framework Repository**: [https://github.com/qubasehq/llmbuilder](https://github.com/qubasehq/llmbuilder)
+
+> [!NOTE]
+> **This is a separate framework** - The complete LLMBuilder framework shown above is **not related to this package**. It's a standalone, comprehensive framework available at the GitHub repository. This package (`llmbuilder_package`) provides the core modular toolkit, while the complete framework offers additional utilities, debugging tools, and production-ready scripts for comprehensive LLM development workflows.
+
 ## Installation
 
 Python 3.9+ recommended.
