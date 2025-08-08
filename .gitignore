@@ -1,0 +1,94 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# VSCode
+.vscode/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDEs and editors
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Checkpoint and benchmark folders
+checkpoints/
+.benchmarks/
+
+# Twine upload artifacts
+*.tar.gz
+*.whl
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Mac/Unix/Docker
+.DS_Store
+Thumbs.db
+*.log
+*.pid
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Build scripts
+*.sh
+
+# Ignore your custom test folders
+Tests_scripts/
+tests/
+
+# If you're using mypy or pyright
+.mypy_cache/
+.pyrightcache/
