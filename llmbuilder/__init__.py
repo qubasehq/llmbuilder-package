@@ -11,7 +11,7 @@ This package provides a modular approach to language model development with supp
 """
 
 __version__ = "0.2.1"
-__author__ = "Qubase"
+__author__ = "Qub△se"
 __email__ = "contact@qubase.in"
 
 # Lazy import machinery to keep import time low

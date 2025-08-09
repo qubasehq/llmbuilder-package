@@ -9,7 +9,7 @@ description = "A comprehensive toolkit for building, training, and deploying lan
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Qubase", email = "contact@qubase.in"}
+    {name = "Qub△se", email = "contact@qubase.in"}
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -46,10 +46,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/qubasehq/llmbuilder-package"
-"Bug Reports" = "https://github.com/qubasehq/llmbuilder-package/issues"
-Source = "https://github.com/qubasehq/llmbuilder-package"
-Documentation = "https://github.com/qubasehq/llmbuilder-package/wiki"
+Homepage = "https://github.com/Qubasehq/llmbuilder-package"
+"Bug Reports" = "https://github.com/Qubasehq/llmbuilder-package/issues"
+Source = "https://github.com/Qubasehq/llmbuilder-package"
+Documentation = "https://github.com/Qubasehq/llmbuilder-package/wiki"
 
 [project.scripts]
 llmbuilder = "llmbuilder.cli:main"

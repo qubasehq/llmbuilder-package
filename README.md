@@ -68,7 +68,7 @@ LLMBuilder/
 └── run.sh             # Bash runner
 ```
 
-🔗 **Full Framework Repository**: [https://github.com/qubasehq/llmbuilder](https://github.com/qubasehq/llmbuilder)
+🔗 **Full Framework Repository**: [https://github.com/Qubasehq/llmbuilder](https://github.com/Qubasehq/llmbuilder)
 
 > [!NOTE]
 > **This is a separate framework** - The complete LLMBuilder framework shown above is **not related to this package**. It's a standalone, comprehensive framework available at the GitHub repository. This package (`llmbuilder_package`) provides the core modular toolkit, while the complete framework offers additional utilities, debugging tools, and production-ready scripts for comprehensive LLM development workflows.

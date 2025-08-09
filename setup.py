@@ -7,7 +7,7 @@ import os
 
 # Read the README file for long description
 def read_readme():
-    readme_path = os.path.join(os.path.dirname(__file__), "..", "README.md")
+    readme_path = os.path.join(os.path.dirname(__file__), "README.md")
     if os.path.exists(readme_path):
         with open(readme_path, "r", encoding="utf-8") as fh:
             return fh.read()
@@ -25,12 +25,12 @@ def get_version():
 setup(
     name="llmbuilder",
     version=get_version(),
-    author="Qubase",
+    author="Qub△se",
     author_email="contact@qubase.in",
     description="A comprehensive toolkit for building, training, and deploying language models",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
-    url="https://github.com/qubasehq/llmbuilder-package",
+    url="https://github.com/Qubasehq/llmbuilder-package",
     packages=find_packages(),
     package_data={
         'llmbuilder': [
@@ -102,8 +102,8 @@ setup(
     python_requires=">=3.8",
     keywords="llm, language model, transformer, training, fine-tuning, nlp, ai, machine learning",
     project_urls={
-        "Bug Reports": "https://github.com/qubasehq/llmbuilder-package/issues",
-        "Source": "https://github.com/qubasehq/llmbuilder-package",
-        "Documentation": "https://github.com/qubasehq/llmbuilder-package/wiki",
+        "Bug Reports": "https://github.com/Qubasehq/llmbuilder-package/issues",
+        "Source": "https://github.com/Qubasehq/llmbuilder-package",
+        "Documentation": "https://github.com/Qubasehq/llmbuilder-package/wiki",
     },
 )

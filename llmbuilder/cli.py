@@ -15,7 +15,7 @@ def main(ctx, verbose):
     """
     🤖 LLMBuilder - A comprehensive toolkit for building, training, and deploying language models.
     
-    Built with ❤️ by Qubase - Empowering developers to create amazing AI applications.
+    Built with ❤️   by  Qub△se  - Empowering developers to create amazing AI applications.
     
     Use 'llmbuilder COMMAND --help' for more information on a specific command.
     
@@ -39,7 +39,7 @@ def main(ctx, verbose):
 def welcome():
     """🎉 Welcome to LLMBuilder! Get started with guided setup."""
     click.echo("🎉 " + click.style("Welcome to LLMBuilder!", fg="blue", bold=True))
-    click.echo("Built with ❤️  by " + click.style("Qubase", fg="cyan", bold=True))
+    click.echo("Built with ❤️  by " + click.style("Qub△se", fg="cyan", bold=True))
     click.echo()
     
     click.echo("🚀 " + click.style("What would you like to do?", fg="green", bold=True))
@@ -84,9 +84,9 @@ def info():
     click.echo("📖 " + click.style("Description:", fg="green", bold=True))
     click.echo("   A comprehensive toolkit for building, training, and deploying language models.")
     click.echo()
-    click.echo("🏢 " + click.style("Built by Qubase:", fg="cyan", bold=True))
-    click.echo("   Qubase is dedicated to empowering developers with cutting-edge AI tools.")
-    click.echo("   Visit us at: " + click.style("https://qubase.in", fg="blue", underline=True))
+    click.echo("🏢 " + click.style("Built by Qub△se:", fg="cyan", bold=True))
+    click.echo("   Qub△se is dedicated to empowering developers with cutting-edge AI tools.")
+    click.echo("   Visit us at: " + click.style("https://Qubase.in", fg="blue", underline=True))
     click.echo()
     click.echo("📦 " + click.style("Available modules:", fg="yellow", bold=True))
     modules = [
@@ -111,24 +111,10 @@ def info():
     click.echo("   llmbuilder generate text -m model.pt -t tokenizer/ -p 'Hello world' --interactive")
     click.echo()
     click.echo("💡 " + click.style("Need help?", fg="green", bold=True) + " Use --help with any command for detailed information.")
-    click.echo("📚 Documentation: https://github.com/qubasehq/llmbuilder-package/wiki")
-    click.echo("🐛 Report issues: https://github.com/qubasehq/llmbuilder-package/issues")
+    click.echo("📚 Documentation: https://github.com/Qubasehq/llmbuilder-package/wiki")
+    click.echo("🐛 Report issues: https://github.com/Qubasehq/llmbuilder-package/issues")
 
-@main.command()
-def info():
-    """Display package information."""
-    click.echo(f"LLMBuilder version {__version__}")
-    click.echo("A comprehensive toolkit for building, training, and deploying language models.")
-    click.echo("\nAvailable modules:")
-    click.echo("  - data: Data loading and preprocessing")
-    click.echo("  - tokenizer: Tokenizer training and management") 
-    click.echo("  - model: Model building and management")
-    click.echo("  - training: Training pipeline")
-    click.echo("  - finetune: Fine-tuning capabilities")
-    click.echo("  - inference: Text generation and inference")
-    click.echo("  - export: Model export utilities")
-    click.echo("  - config: Configuration management")
-    click.echo("  - utils: Common utilities")
+# Duplicate info command removed - keeping the more detailed version above
 
 # Data processing commands
 @main.group()
@@ -394,7 +380,7 @@ def text(model, tokenizer, prompt, interactive, max_tokens, temperature, top_k, 
     # Interactive setup mode
     if setup or not model or not tokenizer:
         click.echo("🤖 " + click.style("LLMBuilder Text Generation Setup", fg="blue", bold=True))
-        click.echo("Built by " + click.style("Qubase", fg="cyan", bold=True) + " - Let's generate some amazing text!\n")
+        click.echo("Built by " + click.style("Qub△se", fg="cyan", bold=True) + " - Let's generate some amazing text!\n")
         
         if not model:
             model = click.prompt("🧠 Path to your trained model checkpoint", type=str)
@@ -459,7 +445,7 @@ def text(model, tokenizer, prompt, interactive, max_tokens, temperature, top_k, 
         click.echo("   • Check that your model and tokenizer paths are correct")
         click.echo("   • Ensure your model and tokenizer are compatible")
         click.echo("   • Try reducing max_tokens if you're running out of memory")
-        click.echo("   • Visit https://github.com/qubasehq/llmbuilder-package/wiki for help")
+        click.echo("   • Visit https://github.com/Qubasehq/llmbuilder-package/wiki for help")
 
 # Model management commands
 @main.group()
@@ -632,7 +618,7 @@ def create(preset, output, interactive):
     # Interactive mode
     if interactive or not preset or not output:
         click.echo("⚙️  " + click.style("LLMBuilder Configuration Creator", fg="blue", bold=True))
-        click.echo("Built by " + click.style("Qubase", fg="cyan", bold=True) + " - Let's configure your setup!\n")
+        click.echo("Built by " + click.style("Qub△se", fg="cyan", bold=True) + " - Let's configure your setup!\n")
         
         if not preset:
             click.echo("🖥️  " + click.style("Available presets:", fg="green", bold=True))
