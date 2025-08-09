@@ -24,7 +24,7 @@ jobs:
         fetch-depth: 0
     
     - name: Setup Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.9'
     
@@ -32,14 +32,18 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r docs/requirements.txt
-        pip install -e . || echo "Package installation failed, continuing with docs only"
+        # Try to install package, but continue if it fails (docs-only build)
+        pip install -e . || echo "Package installation failed, continuing with docs-only build"
     
     - name: Build documentation
       run: |
+        echo "Building documentation..."
+        mkdocs --version
         mkdocs build --clean --strict
+        echo "Documentation build completed successfully"
     
     - name: Upload artifact
-      uses: actions/upload-pages-artifact@v2
+      uses: actions/upload-pages-artifact@v3
       with:
         path: ./site
 
@@ -53,4 +57,4 @@ jobs:
     steps:
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v2
+      uses: actions/deploy-pages@v4

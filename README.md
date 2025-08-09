@@ -1,6 +1,10 @@
-# llmbuilder
+# 🤖 LLMBuilder
 
-A modular toolkit for building, training, fine-tuning, generating, and exporting GPT-style language models with CPU-friendly defaults.
+[![Documentation](https://img.shields.io/badge/docs-mkdocs-blue)](https://qubasehq.github.io/llmbuilder-package/)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+A comprehensive toolkit for building, training, fine-tuning, and deploying GPT-style language models with CPU-friendly defaults.
 
 ## About LLMBuilder Framework
 
@@ -73,17 +77,49 @@ LLMBuilder/
 > [!NOTE]
 > **This is a separate framework** - The complete LLMBuilder framework shown above is **not related to this package**. It's a standalone, comprehensive framework available at the GitHub repository. This package (`llmbuilder_package`) provides the core modular toolkit, while the complete framework offers additional utilities, debugging tools, and production-ready scripts for comprehensive LLM development workflows.
 
-## Installation
+## 🚀 Quick Start
 
-Python 3.9+ recommended.
+### Installation
 
-- CPU-only PyTorch:
-  - `pip install torch --index-url https://download.pytorch.org/whl/cpu`
-- Core dependencies:
-  - `pip install -e .`
+```bash
+pip install llmbuilder
+```
 
-Optional:
-- Performance tests: `pip install pytest-benchmark`
+### 5-Minute Example
+
+```python
+import llmbuilder as lb
+
+# Load configuration and build model
+cfg = lb.load_config(preset="cpu_small")
+model = lb.build_model(cfg.model)
+
+# Train the model
+from llmbuilder.data import TextDataset
+dataset = TextDataset("./data/clean.txt", block_size=cfg.model.max_seq_length)
+results = lb.train_model(model, dataset, cfg.training)
+
+# Generate text
+text = lb.generate_text(
+    model_path="./checkpoints/model.pt",
+    tokenizer_path="./tokenizers",
+    prompt="The future of AI is",
+    max_new_tokens=50
+)
+print(text)
+```
+
+## 📚 Documentation
+
+**Complete documentation is available at: [https://qubasehq.github.io/llmbuilder-package/](https://qubasehq.github.io/llmbuilder-package/)**
+
+The documentation includes:
+- 📖 **Getting Started Guide** - From installation to your first model
+- 🎯 **User Guides** - Comprehensive guides for all features  
+- 🖥️ **CLI Reference** - Complete command-line interface documentation
+- 🐍 **Python API** - Full API reference with examples
+- 📋 **Examples** - Working code examples for common tasks
+- ❓ **FAQ** - Answers to frequently asked questions
 
 ## CLI Quickstart
 
