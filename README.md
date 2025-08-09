@@ -1,6 +1,6 @@
 # 🤖 LLMBuilder
 
-[![Documentation](https://img.shields.io/badge/docs-mkdocs-blue)](https://qubasehq.github.io/llmbuilder-package/)
+[![Documentation](https://img.shields.io/badge/docs-live-blue)](https://llm-package.gainandshine.com/)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -111,7 +111,7 @@ print(text)
 
 ## 📚 Documentation
 
-**Complete documentation is available at: [https://qubasehq.github.io/llmbuilder-package/](https://qubasehq.github.io/llmbuilder-package/)**
+**Complete documentation is available at: [https://llm-package.gainandshine.com/](https://llm-package.gainandshine.com/)**
 
 The documentation includes:
 - 📖 **Getting Started Guide** - From installation to your first model

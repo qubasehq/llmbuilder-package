@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/index.html</loc>
+         <loc>https://llm-package.gainandshine.com/index.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/api/core.html</loc>
+         <loc>https://llm-package.gainandshine.com/api/core.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/cli/overview.html</loc>
+         <loc>https://llm-package.gainandshine.com/cli/overview.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/examples/basic-training.html</loc>
+         <loc>https://llm-package.gainandshine.com/examples/basic-training.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/getting-started/first-model.html</loc>
+         <loc>https://llm-package.gainandshine.com/getting-started/first-model.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/getting-started/installation.html</loc>
+         <loc>https://llm-package.gainandshine.com/getting-started/installation.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/getting-started/quickstart.html</loc>
+         <loc>https://llm-package.gainandshine.com/getting-started/quickstart.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/reference/faq.html</loc>
+         <loc>https://llm-package.gainandshine.com/reference/faq.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/reference/migration.html</loc>
+         <loc>https://llm-package.gainandshine.com/reference/migration.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/user-guide/configuration.html</loc>
+         <loc>https://llm-package.gainandshine.com/user-guide/configuration.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/user-guide/data-processing.html</loc>
+         <loc>https://llm-package.gainandshine.com/user-guide/data-processing.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/user-guide/export.html</loc>
+         <loc>https://llm-package.gainandshine.com/user-guide/export.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/user-guide/fine-tuning.html</loc>
+         <loc>https://llm-package.gainandshine.com/user-guide/fine-tuning.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/user-guide/generation.html</loc>
+         <loc>https://llm-package.gainandshine.com/user-guide/generation.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/user-guide/tokenization.html</loc>
+         <loc>https://llm-package.gainandshine.com/user-guide/tokenization.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
     <url>
-         <loc>https://qubasehq.github.io/llmbuilder-package/user-guide/training.html</loc>
+         <loc>https://llm-package.gainandshine.com/user-guide/training.html</loc>
          <lastmod>2025-08-09</lastmod>
     </url>
 </urlset>
