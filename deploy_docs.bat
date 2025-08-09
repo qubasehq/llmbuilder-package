@@ -31,7 +31,7 @@ if "%choice%"=="1" (
     echo 📤 Deploying to GitHub Pages...
     python -m mkdocs gh-deploy --clean
     echo ✅ Deployed to GitHub Pages!
-    echo 🌐 Your docs will be available at: https://qubasehq.github.io/llmbuilder-package/
+    echo 🌐 Your docs will be available at: https://llm-package.gainandshine.com/
 ) else if "%choice%"=="2" (
     echo.
     echo 🌐 Starting local server...
