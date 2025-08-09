@@ -54,6 +54,12 @@ plugins:
             merge_init_into_class: true
   - git-revision-date-localized:
       enable_creation_date: true
+      fallback_to_build_date: true
+      enable_git_follow: false
+
+# Exclude files that conflict with navigation
+exclude_docs: |
+  README.md
 
 markdown_extensions:
   - admonition
@@ -70,8 +76,8 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - attr_list
   - md_in_html
   - toc:
@@ -93,30 +99,11 @@ nav:
     - Model Export: user-guide/export.md
   - CLI Reference:
     - Overview: cli/overview.md
-    - Data Commands: cli/data.md
-    - Training Commands: cli/training.md
-    - Generation Commands: cli/generation.md
-    - Export Commands: cli/export.md
   - Python API:
     - Core API: api/core.md
-    - Configuration: api/config.md
-    - Data Module: api/data.md
-    - Model Module: api/model.md
-    - Training Module: api/training.md
-    - Inference Module: api/inference.md
-    - Export Module: api/export.md
   - Examples:
     - Basic Training: examples/basic-training.md
-    - Custom Models: examples/custom-models.md
-    - Fine-tuning: examples/fine-tuning.md
-    - Batch Processing: examples/batch-processing.md
-  - Advanced:
-    - Architecture: advanced/architecture.md
-    - Performance: advanced/performance.md
-    - Troubleshooting: advanced/troubleshooting.md
-    - Contributing: advanced/contributing.md
   - Reference:
-    - Changelog: reference/changelog.md
     - Migration Guide: reference/migration.md
     - FAQ: reference/faq.md
 

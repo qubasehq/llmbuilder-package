@@ -279,7 +279,8 @@ Ready to dive deeper? Check out these resources:
 - **[First Model Tutorial](first-model.md)** - Detailed step-by-step guide
 - **[Configuration Guide](../user-guide/configuration.md)** - Customize your setup
 - **[Training Guide](../user-guide/training.md)** - Advanced training techniques
-- **[Examples](../examples/basic-training.md)** - Real-world examples
+- **[Model Export](../user-guide/export.md)** - Deploy your models
+- **[CLI Reference](../cli/overview.md)** - Complete CLI documentation
 
 ---
 

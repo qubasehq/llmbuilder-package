@@ -48,15 +48,15 @@ llmbuilder [GLOBAL_OPTIONS] COMMAND [COMMAND_OPTIONS] [ARGS]
 
 | Command | Description |
 |---------|-------------|
-| [`welcome`](#welcome) | Interactive getting started guide |
-| [`info`](#info) | Display package information |
-| [`config`](#config) | Configuration management |
-| [`data`](#data) | Data processing and loading |
-| [`train`](#train) | Model training |
-| [`finetune`](#finetune) | Model fine-tuning |
-| [`generate`](#generate) | Text generation |
-| [`model`](#model) | Model management |
-| [`export`](#export) | Model export utilities |
+| `welcome` | Interactive getting started guide |
+| `info` | Display package information |
+| `config` | Configuration management |
+| `data` | Data processing and loading |
+| `train` | Model training |
+| `finetune` | Model fine-tuning |
+| `generate` | Text generation |
+| `model` | Model management |
+| `export` | Model export utilities |
 
 ## 🎯 Command Categories
 

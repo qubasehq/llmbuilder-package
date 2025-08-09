@@ -460,7 +460,7 @@ Now that you have the basics down, explore:
 - **[Advanced Training](../user-guide/training.md)** - Learn advanced techniques
 - **[Fine-tuning Guide](../user-guide/fine-tuning.md)** - Adapt models to specific domains
 - **[Model Export](../user-guide/export.md)** - Deploy your models
-- **[Examples](../examples/basic-training.md)** - See real-world applications
+- **[CLI Reference](../cli/overview.md)** - Complete CLI documentation
 
 ---
 
