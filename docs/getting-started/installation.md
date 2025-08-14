@@ -5,12 +5,14 @@ This guide will help you install LLMBuilder and set up your environment for trai
 ## System Requirements
 
 ### Minimum Requirements
+
 - **Python**: 3.8 or higher
 - **RAM**: 4GB (8GB+ recommended)
 - **Storage**: 2GB free space
 - **OS**: Windows, macOS, or Linux
 
 ### Recommended Requirements
+
 - **Python**: 3.9 or higher
 - **RAM**: 16GB or more
 - **GPU**: NVIDIA GPU with 8GB+ VRAM (optional but recommended)
@@ -67,8 +69,8 @@ llmbuilder info
 You should see output similar to:
 
 ```
-LLMBuilder 0.2.1 installed successfully!
-🤖 LLMBuilder version 0.2.1
+LLMBuilder installed successfully!
+🤖 LLMBuilder version
 A comprehensive toolkit for building, training, and deploying language models.
 ```
 
@@ -92,6 +94,7 @@ pip install llmbuilder[data]
 ```
 
 This includes:
+
 - `pandas` - For data manipulation
 - `pymupdf` - For PDF processing
 - `docx2txt` - For DOCX files
@@ -107,6 +110,7 @@ pip install llmbuilder[dev]
 ```
 
 This includes:
+
 - `pytest` - For running tests
 - `black` - For code formatting
 - `ruff` - For linting
@@ -121,6 +125,7 @@ pip install llmbuilder[export]
 ```
 
 This includes:
+
 - `onnx` - For ONNX export
 - `onnxruntime` - For ONNX inference
 
@@ -134,13 +139,13 @@ Create a dedicated virtual environment for LLMBuilder:
     ```bash
     # Create virtual environment
     python -m venv llmbuilder-env
-    
+
     # Activate it
     # On Windows:
     llmbuilder-env\Scripts\activate
     # On macOS/Linux:
     source llmbuilder-env/bin/activate
-    
+
     # Install LLMBuilder
     pip install llmbuilder
     ```
@@ -150,7 +155,7 @@ Create a dedicated virtual environment for LLMBuilder:
     # Create conda environment
     conda create -n llmbuilder python=3.9
     conda activate llmbuilder
-    
+
     # Install LLMBuilder
     pip install llmbuilder
     ```
@@ -180,6 +185,7 @@ export LLMBUILDER_CACHE_DIR=/path/to/cache
 #### ImportError: No module named 'torch'
 
 **Solution**: Install PyTorch first:
+
 ```bash
 pip install torch
 ```
@@ -187,6 +193,7 @@ pip install torch
 #### CUDA out of memory
 
 **Solution**: Use CPU-only installation or reduce batch size:
+
 ```bash
 pip install torch --index-url https://download.pytorch.org/whl/cpu
 ```
@@ -194,6 +201,7 @@ pip install torch --index-url https://download.pytorch.org/whl/cpu
 #### Permission denied errors
 
 **Solution**: Use `--user` flag or virtual environment:
+
 ```bash
 pip install --user llmbuilder
 ```
@@ -201,6 +209,7 @@ pip install --user llmbuilder
 #### Package conflicts
 
 **Solution**: Create a fresh virtual environment:
+
 ```bash
 python -m venv fresh-env
 source fresh-env/bin/activate  # or fresh-env\Scripts\activate on Windows

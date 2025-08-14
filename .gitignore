@@ -94,3 +94,5 @@ tests/
 .pyrightcache/
 
 basic_example/
+Model_Test/
+examples/

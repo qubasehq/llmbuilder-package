@@ -2,8 +2,10 @@
 Setup configuration for LLMBuilder package.
 """
 
-from setuptools import setup, find_packages
 import os
+
+from setuptools import find_packages, setup
+
 
 # Read the README file for long description
 def read_readme():
@@ -11,7 +13,10 @@ def read_readme():
     if os.path.exists(readme_path):
         with open(readme_path, "r", encoding="utf-8") as fh:
             return fh.read()
-    return "A comprehensive toolkit for building, training, and deploying language models."
+    return (
+        "A comprehensive toolkit for building, training, and deploying language models."
+    )
+
 
 # Read version from the package
 def get_version():
@@ -21,6 +26,7 @@ def get_version():
             if line.startswith("__version__"):
                 return line.split("=")[1].strip().strip('"').strip("'")
     return "0.1.0"
+
 
 setup(
     name="llmbuilder",
@@ -33,18 +39,17 @@ setup(
     url="https://github.com/Qubasehq/llmbuilder-package",
     packages=find_packages(),
     package_data={
-        'llmbuilder': [
-            'config/defaults/*.json',
-            'templates/*',
+        "llmbuilder": [
+            "config/defaults/*.json",
+            "templates/*",
         ],
     },
     install_requires=[
         # Core ML dependencies
         "torch>=2.0.0,<3.0.0",
-        "transformers>=4.30.0,<5.0.0", 
+        "transformers>=4.30.0,<5.0.0",
         "tokenizers>=0.13.0,<1.0.0",
         "sentencepiece>=0.1.99,<1.0.0",
-        
         # Data processing
         "pandas>=2.0.0,<3.0.0",
         "numpy>=1.24.0,<2.0.0",
@@ -53,12 +58,10 @@ setup(
         "python-pptx>=0.6.21,<1.0.0",
         "markdown>=3.4.0,<4.0.0",
         "beautifulsoup4>=4.12.0,<5.0.0",
-        
         # Utilities
         "tqdm>=4.65.0,<5.0.0",
         "PyYAML>=6.0,<7.0.0",
         "loguru>=0.7.0,<1.0.0",
-        
         # CLI support
         "click>=8.0.0,<9.0.0",
     ],

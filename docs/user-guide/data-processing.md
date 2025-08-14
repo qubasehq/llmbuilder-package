@@ -1,6 +1,6 @@
 # Data Processing
 
-Data is the foundation of any successful language model. LLMBuilder provides comprehensive tools for loading, cleaning, and preparing text data from various sources. This guide covers everything from basic text files to complex document processing.
+Data is the foundation of any successful language model. LLMBuilder provides comprehensive tools for loading, cleaning, and preparing text data from various sources, including advanced multi-format ingestion, semantic deduplication, and intelligent text normalization. This guide covers everything from basic text files to complex document processing pipelines.
 
 ## 🎯 Overview
 
@@ -8,91 +8,275 @@ LLMBuilder's data processing pipeline handles:
 
 ```mermaid
 graph LR
-    A[Raw Documents] --> B[Data Loader]
-    B --> C[Text Cleaner]
-    C --> D[Dataset Creator]
-    D --> E[Training Ready]
-    
-    A1[PDF] --> B
-    A2[DOCX] --> B
-    A3[TXT] --> B
-    A4[HTML] --> B
-    A5[Markdown] --> B
-    
+    A[Multi-Format Documents] --> B[Ingestion Pipeline]
+    B --> C[Text Normalization]
+    C --> D[Deduplication Engine]
+    D --> E[Dataset Creator]
+    E --> F[Training Ready]
+
+    A1[HTML] --> B
+    A2[Markdown] --> B
+    A3[EPUB] --> B
+    A4[PDF + OCR] --> B
+    A5[TXT] --> B
+
+    D1[Exact Dedup] --> D
+    D2[Semantic Dedup] --> D
+
     style A fill:#e1f5fe
-    style E fill:#e8f5e8
+    style D fill:#f3e5f5
+    style F fill:#e8f5e8
 ```
 
 ## 📁 Supported File Formats
 
 LLMBuilder can process various document formats:
 
-| Format | Extension | Description | Quality |
-|--------|-----------|-------------|---------|
-| Plain Text | `.txt` | Raw text files | ⭐⭐⭐⭐⭐ |
-| PDF | `.pdf` | Portable Document Format | ⭐⭐⭐⭐ |
-| Word Documents | `.docx` | Microsoft Word documents | ⭐⭐⭐⭐ |
-| HTML | `.html`, `.htm` | Web pages | ⭐⭐⭐ |
-| Markdown | `.md` | Markdown files | ⭐⭐⭐⭐⭐ |
-| PowerPoint | `.pptx` | Presentation slides | ⭐⭐⭐ |
-| CSV | `.csv` | Comma-separated values | ⭐⭐⭐ |
+| Format | Extension | Description | Features | Quality |
+|--------|-----------|-------------|----------|---------|
+| Plain Text | `.txt` | Raw text files | Direct processing | ⭐⭐⭐⭐⭐ |
+| HTML | `.html`, `.htm` | Web pages | Tag removal, structure preservation | ⭐⭐⭐⭐ |
+| Markdown | `.md` | Markdown files | Syntax parsing, link extraction | ⭐⭐⭐⭐⭐ |
+| EPUB | `.epub` | E-book format | Chapter extraction, metadata | ⭐⭐⭐⭐⭐ |
+| PDF | `.pdf` | Portable Document Format | OCR fallback, layout preservation | ⭐⭐⭐⭐ |
 
 ## 🚀 Quick Start
 
-### Basic Data Loading
+### Advanced Multi-Format Ingestion
 
 ```bash
-# Load all supported files from a directory
+# Process all supported formats with advanced features
 llmbuilder data load \
   --input ./documents \
-  --output clean_text.txt \
+  --output processed_text.txt \
   --format all \
-  --clean
+  --clean \
+  --enable-ocr \
+  --extract-metadata
 ```
 
-### Python API
+### Deduplication Pipeline
+
+```bash
+# Remove exact and semantic duplicates
+llmbuilder data deduplicate \
+  --input processed_text.txt \
+  --output clean_text.txt \
+  --exact \
+  --semantic \
+  --threshold 0.85
+```
+
+### Advanced Ingestion Pipeline
 
 ```python
-from llmbuilder.data import DataLoader
+from llmbuilder.data.ingest import IngestionPipeline
+from llmbuilder.data.dedup import DeduplicationPipeline
 
-# Initialize data loader
-loader = DataLoader(
-    min_length=50,      # Filter short texts
-    clean_text=True,    # Apply text cleaning
-    remove_duplicates=True
+# Initialize advanced ingestion pipeline
+pipeline = IngestionPipeline(
+    supported_formats=['html', 'markdown', 'epub', 'pdf', 'txt'],
+    batch_size=100,
+    num_workers=4,
+    enable_ocr=True,
+    ocr_quality_threshold=0.7,
+    extract_metadata=True
 )
 
-# Load single file
-text = loader.load_file("document.pdf")
+# Process entire directory
+results = pipeline.process_directory("./raw_documents", "./processed")
 
-# Load directory
-texts = loader.load_directory("./documents")
+print(f"Processed {results.total_files} files")
+print(f"Success: {results.successful_files}")
+print(f"Errors: {results.failed_files}")
 
-# Combine and save
-combined = "\n\n".join(texts)
-with open("training_data.txt", "w", encoding="utf-8") as f:
-    f.write(combined)
+# Advanced deduplication
+dedup_pipeline = DeduplicationPipeline(
+    enable_exact_deduplication=True,
+    enable_semantic_deduplication=True,
+    similarity_threshold=0.85,
+    embedding_model="all-MiniLM-L6-v2"
+)
+
+# Remove duplicates
+dedup_results = dedup_pipeline.process_file(
+    "./processed/combined.txt",
+    "./clean/deduplicated.txt"
+)
+
+print(f"Original lines: {dedup_results.original_count}")
+print(f"After deduplication: {dedup_results.final_count}")
+print(f"Removed: {dedup_results.removed_count} ({dedup_results.removal_percentage:.1f}%)")
+```
+
+## 🔄 Advanced Data Processing Features
+
+### Multi-Format Document Ingestion
+
+LLMBuilder's advanced ingestion pipeline can process multiple document formats simultaneously with intelligent content extraction:
+
+```python
+from llmbuilder.data.ingest import IngestionPipeline
+
+# Configure advanced ingestion
+config = {
+    "supported_formats": ["html", "markdown", "epub", "pdf", "txt"],
+    "batch_size": 200,
+    "num_workers": 8,
+    "output_format": "jsonl",  # or "txt"
+    "preserve_structure": True,
+    "extract_metadata": True,
+
+    # HTML-specific settings
+    "html_parser": "lxml",
+    "remove_scripts": True,
+    "remove_styles": True,
+
+    # PDF-specific settings
+    "enable_ocr": True,
+    "ocr_quality_threshold": 0.7,
+    "ocr_language": "eng",
+
+    # EPUB-specific settings
+    "extract_toc": True,
+    "chapter_separator": "\n\n---\n\n"
+}
+
+pipeline = IngestionPipeline(**config)
+results = pipeline.process_directory("./documents", "./processed")
+```
+
+### Intelligent Deduplication
+
+Remove both exact and semantic duplicates with configurable similarity thresholds:
+
+```python
+from llmbuilder.data.dedup import DeduplicationPipeline
+
+# Configure deduplication
+dedup_config = {
+    "enable_exact_deduplication": True,
+    "enable_semantic_deduplication": True,
+    "similarity_threshold": 0.9,
+    "embedding_model": "all-MiniLM-L6-v2",
+    "batch_size": 2000,
+    "chunk_size": 1024,
+    "min_text_length": 100,
+    "use_gpu_for_embeddings": True,
+    "similarity_metric": "cosine"
+}
+
+dedup = DeduplicationPipeline(**dedup_config)
+
+# Process with detailed statistics
+results = dedup.process_file(
+    input_file="./processed/raw_text.txt",
+    output_file="./clean/deduplicated.txt"
+)
+
+print(f"Deduplication Results:")
+print(f"  Original: {results.original_count:,} lines")
+print(f"  Exact duplicates removed: {results.exact_duplicates:,}")
+print(f"  Semantic duplicates removed: {results.semantic_duplicates:,}")
+print(f"  Final: {results.final_count:,} lines")
+print(f"  Reduction: {results.removal_percentage:.1f}%")
+```
+
+### Text Normalization
+
+Advanced text normalization with configurable rules:
+
+```python
+from llmbuilder.data.normalize import TextNormalizer
+
+normalizer = TextNormalizer(
+    normalize_whitespace=True,
+    fix_encoding_issues=True,
+    remove_control_characters=True,
+    normalize_quotes=True,
+    normalize_dashes=True,
+    normalize_unicode=True
+)
+
+# Normalize text with statistics
+normalized_text, stats = normalizer.normalize_with_stats(raw_text)
+
+print(f"Normalization applied {stats.total_changes} changes:")
+for rule, count in stats.rule_applications.items():
+    print(f"  {rule}: {count} changes")
 ```
 
 ## 📄 File Format Specifics
 
-### PDF Processing
+### HTML Processing
 
-PDFs are processed using PyMuPDF for high-quality text extraction:
+HTML documents are processed with intelligent content extraction:
 
 ```python
-from llmbuilder.data import DataLoader
+from llmbuilder.data.processors import HTMLProcessor
 
-loader = DataLoader(
-    pdf_options={
-        "extract_images": False,    # Skip image text extraction
-        "preserve_layout": True,    # Maintain document structure
-        "min_font_size": 8,        # Filter small text
-        "ignore_headers_footers": True
-    }
+processor = HTMLProcessor(
+    parser="lxml",              # html.parser, lxml, html5lib
+    remove_scripts=True,        # Remove JavaScript
+    remove_styles=True,         # Remove CSS
+    preserve_links=False,       # Extract link text only
+    extract_tables=True,        # Convert tables to text
+    min_text_length=20         # Filter short elements
 )
 
-text = loader.load_file("document.pdf")
+text = processor.process_file("webpage.html")
+```
+
+### Markdown Processing
+
+Markdown files are converted to clean text while preserving structure:
+
+```python
+from llmbuilder.data.processors import MarkdownProcessor
+
+processor = MarkdownProcessor(
+    preserve_code_blocks=True,   # Keep code formatting
+    extract_links=True,          # Extract link URLs
+    preserve_tables=True,        # Convert tables to text
+    remove_html_tags=True        # Strip embedded HTML
+)
+
+text = processor.process_file("document.md")
+```
+
+### EPUB Processing
+
+E-books are processed with chapter-aware extraction:
+
+```python
+from llmbuilder.data.processors import EPUBProcessor
+
+processor = EPUBProcessor(
+    extract_toc=True,           # Include table of contents
+    chapter_separator="\n\n---\n\n",  # Chapter delimiter
+    include_metadata=True,       # Extract book metadata
+    preserve_formatting=False    # Convert to plain text
+)
+
+text = processor.process_file("book.epub")
+```
+
+### PDF Processing
+
+PDFs are processed with OCR fallback for scanned documents:
+
+```python
+from llmbuilder.data.processors import PDFProcessor
+
+processor = PDFProcessor(
+    enable_ocr=True,            # OCR for scanned PDFs
+    ocr_quality_threshold=0.5,  # Quality threshold for OCR
+    ocr_language="eng",         # OCR language
+    preserve_layout=True,       # Maintain document structure
+    extract_images=False        # Skip image text extraction
+)
+
+text = processor.process_file("document.pdf")
 ```
 
 #### PDF Processing Options
@@ -253,7 +437,7 @@ from pathlib import Path
 
 def create_training_dataset(input_dir, output_file, block_size=1024):
     """Complete data preprocessing pipeline."""
-    
+
     # Step 1: Load raw data
     print("📁 Loading raw documents...")
     loader = DataLoader(
@@ -261,10 +445,10 @@ def create_training_dataset(input_dir, output_file, block_size=1024):
         clean_text=True,
         remove_duplicates=True
     )
-    
+
     texts = []
     input_path = Path(input_dir)
-    
+
     for file_path in input_path.rglob("*"):
         if file_path.suffix.lower() in loader.supported_extensions:
             try:
@@ -274,11 +458,11 @@ def create_training_dataset(input_dir, output_file, block_size=1024):
                     print(f"  ✅ {file_path.name}: {len(text):,} chars")
             except Exception as e:
                 print(f"  ❌ {file_path.name}: {e}")
-    
+
     # Step 2: Combine and clean
     print(f"\n🧹 Cleaning {len(texts)} documents...")
     combined_text = "\n\n".join(texts)
-    
+
     cleaner = TextCleaner(
         normalize_whitespace=True,
         remove_urls=True,
@@ -286,19 +470,19 @@ def create_training_dataset(input_dir, output_file, block_size=1024):
         min_sentence_length=20,
         remove_duplicates=True
     )
-    
+
     cleaned_text = cleaner.clean(combined_text)
     stats = cleaner.get_stats()
-    
+
     print(f"  Original: {stats.original_length:,} characters")
     print(f"  Cleaned: {stats.cleaned_length:,} characters")
     print(f"  Removed: {stats.removal_percentage:.1f}%")
-    
+
     # Step 3: Save processed text
     print(f"\n💾 Saving to {output_file}...")
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(cleaned_text)
-    
+
     # Step 4: Create dataset
     print(f"\n📊 Creating dataset...")
     dataset = TextDataset(
@@ -306,11 +490,11 @@ def create_training_dataset(input_dir, output_file, block_size=1024):
         block_size=block_size,
         stride=block_size // 2
     )
-    
+
     print(f"  Dataset size: {len(dataset):,} samples")
     print(f"  Sequence length: {block_size}")
     print(f"  Total tokens: {len(dataset) * block_size:,}")
-    
+
     return dataset
 
 # Usage
@@ -350,21 +534,21 @@ from llmbuilder.data import BaseDataset
 
 class CustomDataset(BaseDataset):
     """Custom dataset with domain-specific processing."""
-    
+
     def __init__(self, data_path, **kwargs):
         super().__init__(**kwargs)
         self.data = self.load_custom_data(data_path)
-    
+
     def load_custom_data(self, data_path):
         """Load and process data in custom format."""
         # Your custom loading logic here
         pass
-    
+
     def __getitem__(self, idx):
         """Get a single sample."""
         # Your custom sample creation logic
         pass
-    
+
     def __len__(self):
         return len(self.data)
 ```
@@ -441,6 +625,7 @@ llmbuilder data load --interactive
 ```
 
 This will prompt you for:
+
 - Input directory or file
 - Output file path
 - File formats to process

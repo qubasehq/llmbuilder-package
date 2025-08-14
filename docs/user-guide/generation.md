@@ -14,12 +14,12 @@ graph LR
     D --> E[Generated Tokens]
     E --> F[Detokenizer]
     F --> G[Generated Text]
-    
+
     D --> D1[Greedy]
     D --> D2[Top-k]
     D --> D3[Top-p]
     D --> D4[Temperature]
-    
+
     style A fill:#e1f5fe
     style G fill:#e8f5e8
 ```
@@ -82,18 +82,18 @@ config = GenerationConfig(
     max_new_tokens=100,         # Maximum tokens to generate
     min_new_tokens=10,          # Minimum tokens to generate
     max_length=1024,            # Total sequence length limit
-    
+
     # Sampling parameters
     temperature=0.8,            # Creativity (0.1-2.0)
     top_k=50,                   # Top-k sampling
     top_p=0.9,                  # Nucleus sampling
     repetition_penalty=1.1,     # Prevent repetition
-    
+
     # Special tokens
     pad_token_id=0,
     eos_token_id=2,
     bos_token_id=1,
-    
+
     # Generation strategy
     do_sample=True,             # Use sampling vs greedy
     num_beams=1,                # Beam search width
@@ -109,20 +109,20 @@ config = GenerationConfig(
     typical_p=0.95,             # Typical sampling
     eta_cutoff=1e-4,            # Eta sampling cutoff
     epsilon_cutoff=1e-4,        # Epsilon sampling cutoff
-    
+
     # Repetition control
     repetition_penalty=1.1,
     no_repeat_ngram_size=3,     # Prevent n-gram repetition
     encoder_repetition_penalty=1.0,
-    
+
     # Length penalties
     length_penalty=1.0,         # Beam search length penalty
     exponential_decay_length_penalty=None,
-    
+
     # Diversity
     num_beam_groups=1,          # Diverse beam search
     diversity_penalty=0.0,
-    
+
     # Stopping criteria
     max_time=None,              # Maximum generation time
     stop_strings=["</s>", "\n\n"],  # Custom stop strings
@@ -152,6 +152,7 @@ text = lb.generate_text(
 ```
 
 **Use cases:**
+
 - Deterministic output needed
 - Factual question answering
 - Code generation
@@ -182,6 +183,7 @@ creative_config = GenerationConfig(
 ```
 
 **Temperature effects:**
+
 - **0.1-0.3**: Very focused, predictable
 - **0.5-0.8**: Balanced creativity
 - **1.0-1.5**: More creative, diverse
@@ -201,6 +203,7 @@ config = GenerationConfig(
 ```
 
 **Top-k values:**
+
 - **1**: Greedy decoding
 - **10-20**: Conservative sampling
 - **40-100**: Balanced sampling
@@ -220,6 +223,7 @@ config = GenerationConfig(
 ```
 
 **Top-p values:**
+
 - **0.1-0.3**: Very focused
 - **0.5-0.7**: Balanced
 - **0.8-0.95**: Diverse
@@ -307,7 +311,7 @@ while True:
     prompt = input("You: ")
     if prompt.lower() == 'quit':
         break
-    
+
     response = generator.generate(prompt)
     print(f"AI: {response}")
 ```
@@ -515,7 +519,7 @@ while True:
     user_input = input("You: ")
     if user_input.lower() == 'quit':
         break
-    
+
     response = chat.respond(user_input, conversation)
     conversation.append({"user": user_input, "assistant": response})
     print(f"AI: {response}")
@@ -604,24 +608,28 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 ## 📚 Best Practices
 
 ### 1. Parameter Selection
+
 - Start with temperature=0.8, top_k=50, top_p=0.9
 - Adjust based on your specific use case
 - Lower temperature for factual content
 - Higher temperature for creative content
 
 ### 2. Prompt Engineering
+
 - Be specific and clear in your prompts
 - Use examples for complex tasks
 - Include context and constraints
 - Test different prompt formats
 
 ### 3. Quality Control
+
 - Always validate generated content
 - Use appropriate filtering for your use case
 - Monitor for bias and inappropriate content
 - Test with diverse inputs
 
 ### 4. Performance Optimization
+
 - Use appropriate batch sizes
 - Enable GPU acceleration when available
 - Cache models for repeated use

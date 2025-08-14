@@ -11,11 +11,11 @@ graph LR
     A[Pre-trained Model] --> B[Fine-tuning Data]
     B --> C[Fine-tuning Process]
     C --> D[Adapted Model]
-    
+
     C --> C1[LoRA]
     C --> C2[Full Fine-tuning]
     C --> C3[Domain Adaptation]
-    
+
     style A fill:#e1f5fe
     style D fill:#e8f5e8
 ```
@@ -74,7 +74,7 @@ lora_config = LoRAConfig(
     dropout=0.1,                # LoRA dropout
     target_modules=[            # Which modules to adapt
         "attention.query",
-        "attention.key", 
+        "attention.key",
         "attention.value",
         "mlp.dense"
     ]
@@ -89,6 +89,7 @@ config = FineTuningConfig(
 ```
 
 **Advantages:**
+
 - Memory efficient (only ~1% of parameters)
 - Fast training
 - Easy to merge back to base model
@@ -109,11 +110,13 @@ config = FineTuningConfig(
 ```
 
 **Advantages:**
+
 - Maximum adaptation capability
 - Better performance on very different domains
 - Full model customization
 
 **Disadvantages:**
+
 - Requires more memory
 - Slower training
 - Risk of catastrophic forgetting
@@ -144,16 +147,16 @@ config = FineTuningConfig(
     num_epochs=5,               # Usually fewer than pre-training
     learning_rate=5e-5,         # Lower than pre-training
     batch_size=8,               # Often smaller due to memory
-    
+
     # Fine-tuning specific
     use_lora=True,              # Use LoRA for efficiency
     freeze_embeddings=False,    # Whether to freeze embeddings
     freeze_layers=0,            # Number of layers to freeze
-    
+
     # Regularization
     weight_decay=0.01,
     dropout_rate=0.1,
-    
+
     # Evaluation
     eval_every=100,
     save_every=500,
@@ -170,21 +173,21 @@ config = FineTuningConfig(
     lora_alpha=32,
     lora_dropout=0.1,
     lora_target_modules=["attention", "mlp"],
-    
+
     # Learning rate scheduling
     scheduler="cosine",
     warmup_ratio=0.1,
     min_lr_ratio=0.1,
-    
+
     # Data settings
     max_seq_length=1024,
     data_collator="default",
-    
+
     # Optimization
     optimizer="adamw",
     gradient_accumulation_steps=4,
     max_grad_norm=1.0,
-    
+
     # Memory optimization
     gradient_checkpointing=True,
     dataloader_pin_memory=True,
@@ -357,7 +360,7 @@ config = FineTuningConfig(
     target_modules=["attention", "mlp"],
     learning_rate=1e-4,
     num_epochs=8,
-    
+
     # Code-specific settings
     max_seq_length=2048,        # Longer sequences for code
     special_tokens=["<code>", "</code>", "<comment>"],
@@ -375,7 +378,7 @@ config = FineTuningConfig(
     lora_rank=16,
     learning_rate=5e-5,
     num_epochs=6,
-    
+
     # Conversation-specific
     dialogue_format=True,
     turn_separator="<turn>",
@@ -429,24 +432,28 @@ config = FineTuningConfig(
 ## 📚 Best Practices
 
 ### 1. Data Preparation
+
 - Use high-quality, task-relevant data
 - Balance dataset sizes across tasks
 - Include diverse examples
 - Validate data format and quality
 
 ### 2. Hyperparameter Selection
+
 - Start with lower learning rates (1e-5 to 1e-4)
 - Use fewer epochs than pre-training (3-10)
 - Choose appropriate LoRA rank (8-32)
 - Monitor validation metrics closely
 
 ### 3. Evaluation Strategy
+
 - Evaluate on both task-specific and general metrics
 - Test for catastrophic forgetting
 - Use held-out test sets
 - Compare against base model performance
 
 ### 4. Resource Management
+
 - Use LoRA for memory efficiency
 - Enable gradient checkpointing if needed
 - Monitor GPU memory usage

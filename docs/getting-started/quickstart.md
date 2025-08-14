@@ -39,6 +39,29 @@ llmbuilder train model \
   --batch-size 2
 ```
 
+### Step 3 (Alternative): Use the bundled example (Model_Test)
+
+If you cloned the repo, we include a tiny cybersecurity dataset under `Model_Test/Data/` and a ready-to-run script in `docs/train_model.py`.
+Note: the script auto-detects a nested `Data/` folder if you pass `--data_dir ./Model_Test`.
+
+```bash
+# Train using the example dataset (explicit Data/ path)
+python docs/train_model.py --data_dir ./Model_Test/Data --output_dir ./Model_Test/output \
+  --epochs 5 --batch_size 1 --block_size 64 --embed_dim 256 --layers 4 --heads 8 \
+  --prompt "Cybersecurity is important because"
+
+# After training, generate again any time without retraining
+python -c "import llmbuilder; print(llmbuilder.generate_text(\
+  model_path=r'.\\Model_Test\\output\\checkpoints\\latest_checkpoint.pt', \
+  tokenizer_path=r'.\\Model_Test\\output\\tokenizer', \
+  prompt='what is Cybersecurity', max_new_tokens=80, temperature=0.8, top_p=0.9))"
+```
+
+Outputs are created in `Model_Test/output/`:
+
+- `Model_Test/output/tokenizer/` – trained tokenizer
+- `Model_Test/output/checkpoints/` – model checkpoints (latest, epoch_*.pt)
+
 ### Step 4: Generate Text
 
 ```bash

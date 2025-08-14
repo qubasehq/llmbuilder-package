@@ -9,7 +9,7 @@ from .train import TokenizerTrainer
 from .utils import TokenizerManager, TokenizerWrapper
 
 __all__ = [
-    'TokenizerTrainer',
-    'TokenizerManager', 
-    'TokenizerWrapper',
+    "TokenizerTrainer",
+    "TokenizerManager",
+    "TokenizerWrapper",
 ]

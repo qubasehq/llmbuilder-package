@@ -7,6 +7,7 @@ Common questions and answers about LLMBuilder usage, troubleshooting, and best p
 ### Q: What are the minimum system requirements?
 
 **A:** LLMBuilder requires:
+
 - **Python 3.8+** (3.9+ recommended)
 - **4GB RAM** minimum (8GB+ recommended)
 - **2GB free disk space** for installation and basic models
@@ -14,7 +15,8 @@ Common questions and answers about LLMBuilder usage, troubleshooting, and best p
 
 ### Q: Should I use CPU or GPU for training?
 
-**A:** 
+**A:**
+
 - **CPU**: Good for learning, small models, and development. Use `preset="cpu_small"`
 - **GPU**: Recommended for production training and larger models. Use `preset="gpu_medium"` or `preset="gpu_large"`
 - **Mixed**: Start with CPU for prototyping, then move to GPU for final training
@@ -22,8 +24,9 @@ Common questions and answers about LLMBuilder usage, troubleshooting, and best p
 ### Q: How long does it take to train a model?
 
 **A:** Training time depends on several factors:
+
 - **Small model (10M params)**: 30 minutes - 2 hours on CPU, 5-15 minutes on GPU
-- **Medium model (50M params)**: 2-8 hours on CPU, 30 minutes - 2 hours on GPU  
+- **Medium model (50M params)**: 2-8 hours on CPU, 30 minutes - 2 hours on GPU
 - **Large model (200M+ params)**: Days on CPU, 2-12 hours on GPU
 
 ## 🔧 Configuration
@@ -59,6 +62,7 @@ config = ModelConfig(
 ### Q: What vocabulary size should I use?
 
 **A:** Vocabulary size depends on your data and use case:
+
 - **8K-16K**: Small datasets, specific domains
 - **16K-32K**: General purpose, balanced size
 - **32K-64K**: Large datasets, multilingual models
@@ -69,6 +73,7 @@ config = ModelConfig(
 ### Q: How much training data do I need?
 
 **A:** Data requirements vary by model size and quality goals:
+
 - **Minimum**: 1MB of text (~200K words) for basic functionality
 - **Recommended**: 10MB+ of text (~2M words) for good quality
 - **Optimal**: 100MB+ of text (~20M words) for high quality
@@ -77,6 +82,7 @@ config = ModelConfig(
 ### Q: What file formats are supported for training data?
 
 **A:** LLMBuilder supports:
+
 - **Text files**: `.txt`, `.md` (best quality)
 - **Documents**: `.pdf`, `.docx` (good quality)
 - **Web content**: `.html`, `.htm` (moderate quality)
@@ -88,26 +94,31 @@ config = ModelConfig(
 **A:** Try these solutions in order:
 
 1. **Reduce batch size**:
+
 ```python
 config.training.batch_size = 4  # or even 2
 ```
 
 2. **Enable gradient checkpointing**:
+
 ```python
 config.model.gradient_checkpointing = True
 ```
 
 3. **Use gradient accumulation**:
+
 ```python
 config.training.gradient_accumulation_steps = 4
 ```
 
 4. **Reduce sequence length**:
+
 ```python
 config.model.max_seq_length = 512
 ```
 
 5. **Use CPU training**:
+
 ```python
 config.system.device = "cpu"
 ```
@@ -125,11 +136,13 @@ config.system.device = "cpu"
 ### Q: How do I know if my model is overfitting?
 
 **A:** Signs of overfitting:
+
 - Training loss decreases but validation loss increases
 - Generated text is repetitive or memorized
 - Model performs poorly on new data
 
 **Solutions:**
+
 - Increase dropout rate (0.1 → 0.2)
 - Add weight decay (0.01)
 - Use early stopping
@@ -147,6 +160,7 @@ config.system.device = "cpu"
    - Higher (0.8-1.2): More creative, diverse
 
 2. **Use nucleus sampling**:
+
 ```python
 config = GenerationConfig(
     temperature=0.8,
@@ -156,6 +170,7 @@ config = GenerationConfig(
 ```
 
 3. **Add repetition penalty**:
+
 ```python
 config.repetition_penalty = 1.1
 ```
@@ -189,7 +204,8 @@ config.repetition_penalty = 1.1
 
 ### Q: When should I fine-tune vs. train from scratch?
 
-**A:** 
+**A:**
+
 - **Fine-tune when**: You have a pre-trained model and domain-specific data
 - **Train from scratch when**: You have lots of data and need full control
 - **Fine-tuning advantages**: Faster, less data needed, preserves general knowledge
@@ -224,16 +240,19 @@ config.repetition_penalty = 1.1
 **A:** LLMBuilder supports multiple deployment options:
 
 1. **GGUF format** (for llama.cpp):
+
 ```bash
 llmbuilder export gguf model.pt --output model.gguf --quantization q4_0
 ```
 
 2. **ONNX format** (for cross-platform):
+
 ```bash
 llmbuilder export onnx model.pt --output model.onnx
 ```
 
 3. **Quantized PyTorch** (for production):
+
 ```bash
 llmbuilder export quantize model.pt --output model_int8.pt --bits 8
 ```
@@ -290,7 +309,7 @@ llmbuilder export quantize model.pt --output model_int8.pt --bits 8
 4. **Wrong model type**: BPE usually works best
 5. **Missing special tokens**: Include `<pad>`, `<unk>`, etc.
 
-### Q: Generated text contains strange characters or formatting.
+### Q: Generated text contains strange characters or formatting
 
 **A:** Text cleaning solutions:
 

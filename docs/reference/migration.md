@@ -28,6 +28,7 @@ The LLMBuilder package represents a major evolution from the original standalone
 ### Legacy Configuration Format
 
 **Old format (config.json):**
+
 ```json
 {
   "n_layer": 12,
@@ -49,6 +50,7 @@ The LLMBuilder package represents a major evolution from the original standalone
 ### New Configuration Format
 
 **New format (structured):**
+
 ```json
 {
   "model": {
@@ -118,6 +120,7 @@ new_config.save("new_config.json")
 ### Legacy Import Pattern
 
 **Old way:**
+
 ```python
 # Legacy imports
 from model import GPTConfig, GPT
@@ -140,6 +143,7 @@ model = GPT(config)
 ### New Import Pattern
 
 **New way:**
+
 ```python
 # New unified import
 import llmbuilder as lb
@@ -152,6 +156,7 @@ model = lb.build_model(config.model)
 ### Training Script Migration
 
 **Legacy training script:**
+
 ```python
 # train.py (legacy)
 import torch
@@ -167,16 +172,17 @@ optimizer = torch.optim.AdamW(model.parameters(), lr=3e-4)
 for iter in range(max_iters):
     X, Y = get_batch('train')
     logits, loss = model(X, Y)
-    
+
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
-    
+
     if iter % eval_interval == 0:
         evaluate()
 ```
 
 **New training script:**
+
 ```python
 # train.py (new)
 import llmbuilder as lb
@@ -196,6 +202,7 @@ results = lb.train_model(model, dataset, config.training)
 ### Generation Script Migration
 
 **Legacy generation:**
+
 ```python
 # sample.py (legacy)
 import torch
@@ -213,6 +220,7 @@ text = enc.decode(generated)
 ```
 
 **New generation:**
+
 ```python
 # generate.py (new)
 import llmbuilder as lb
@@ -231,6 +239,7 @@ text = lb.generate_text(
 ### Legacy CLI Commands
 
 **Old commands:**
+
 ```bash
 # Legacy training
 python train.py --config config.json --data data.txt
@@ -245,6 +254,7 @@ python prepare_data.py --input raw/ --output data.txt
 ### New CLI Commands
 
 **New commands:**
+
 ```bash
 # New training
 llmbuilder train model --config config.json --data data.txt --output model/
@@ -270,6 +280,7 @@ llmbuilder data load --input raw/ --output data.txt --clean
 ### Legacy Data Format
 
 **Old format:**
+
 - Single text file with raw concatenated text
 - Manual tokenization required
 - No metadata or structure
@@ -277,12 +288,14 @@ llmbuilder data load --input raw/ --output data.txt --clean
 ### New Data Format
 
 **New format:**
+
 - Multiple input formats supported (PDF, DOCX, etc.)
 - Automatic cleaning and preprocessing
 - Structured dataset with metadata
 - Built-in train/validation splitting
 
 **Migration example:**
+
 ```python
 # Legacy data preparation
 with open('data.txt', 'r') as f:
@@ -314,13 +327,14 @@ dataset = TextDataset(
 ### Legacy Model Definition
 
 **Old way:**
+
 ```python
 class GPT(nn.Module):
     def __init__(self, config):
         super().__init__()
         self.config = config
         # Manual layer definition...
-        
+
     def forward(self, idx, targets=None):
         # Manual forward pass...
 ```
@@ -328,6 +342,7 @@ class GPT(nn.Module):
 ### New Model Definition
 
 **New way:**
+
 ```python
 # Use built-in model builder
 import llmbuilder as lb
@@ -354,6 +369,7 @@ model = GPTModel(custom_config)
 ### Legacy Deployment
 
 **Old way:**
+
 ```python
 # Manual model saving/loading
 torch.save({
@@ -370,6 +386,7 @@ model.load_state_dict(checkpoint['model'])
 ### New Deployment
 
 **New way:**
+
 ```python
 # Automatic model management
 from llmbuilder.model import save_model, load_model
@@ -393,6 +410,7 @@ export_gguf("model.pt", "model.gguf", quantization="q4_0")
 ### Verify Migration Success
 
 **1. Configuration Test:**
+
 ```python
 import llmbuilder as lb
 
@@ -406,6 +424,7 @@ print(f"Model built: {sum(p.numel() for p in model.parameters()):,} parameters")
 ```
 
 **2. Training Test:**
+
 ```python
 # Test training pipeline
 from llmbuilder.data import TextDataset
@@ -416,6 +435,7 @@ print(f"Training completed: {results.final_loss:.4f} final loss")
 ```
 
 **3. Generation Test:**
+
 ```python
 # Test generation
 text = lb.generate_text(
@@ -433,6 +453,7 @@ print(f"Generated: {text}")
 
 **Problem:** Legacy configs fail validation
 **Solution:**
+
 ```python
 from llmbuilder.config import validate_config, fix_config
 
@@ -449,6 +470,7 @@ if not is_valid:
 
 **Problem:** Tokenizer vocab size doesn't match model
 **Solution:**
+
 ```python
 # Check and fix vocab size mismatch
 from llmbuilder.tokenizer import Tokenizer
@@ -461,6 +483,7 @@ config.model.vocab_size = len(tokenizer)
 
 **Problem:** New version is slower than legacy
 **Solution:**
+
 ```python
 # Enable performance optimizations
 config.system.compile = True  # PyTorch 2.0 compilation
@@ -472,6 +495,7 @@ config.training.dataloader_num_workers = 4  # Parallel data loading
 
 **Problem:** Generated text quality differs from legacy
 **Solution:**
+
 ```python
 # Match legacy generation parameters
 from llmbuilder.inference import GenerationConfig
@@ -508,48 +532,48 @@ import llmbuilder as lb
 
 def migrate_project(legacy_dir, new_dir):
     """Migrate entire legacy project to new structure."""
-    
+
     legacy_path = Path(legacy_dir)
     new_path = Path(new_dir)
     new_path.mkdir(exist_ok=True)
-    
+
     print(f"Migrating {legacy_dir} -> {new_dir}")
-    
+
     # 1. Migrate configuration
     legacy_config = legacy_path / "config.json"
     if legacy_config.exists():
         print("Migrating configuration...")
         config = lb.load_config(str(legacy_config))
         config.save(str(new_path / "config.json"))
-    
+
     # 2. Copy and organize data
     print("Organizing data...")
     data_dir = new_path / "data"
     data_dir.mkdir(exist_ok=True)
-    
+
     for data_file in legacy_path.glob("*.txt"):
         if "data" in data_file.name.lower():
             shutil.copy2(data_file, data_dir / data_file.name)
-    
+
     # 3. Migrate model if exists
     model_files = list(legacy_path.glob("*.pt"))
     if model_files:
         print("Migrating model...")
         model_dir = new_path / "model"
         model_dir.mkdir(exist_ok=True)
-        
+
         for model_file in model_files:
             shutil.copy2(model_file, model_dir / model_file.name)
-    
+
     # 4. Create new training script
     print("Creating new training script...")
     create_training_script(new_path)
-    
+
     print("Migration completed!")
 
 def create_training_script(project_dir):
     """Create new training script using LLMBuilder package."""
-    
+
     script_content = '''#!/usr/bin/env python3
 """
 Migrated training script using LLMBuilder package.
@@ -561,25 +585,25 @@ from llmbuilder.data import TextDataset
 def main():
     # Load configuration
     config = lb.load_config("config.json")
-    
+
     # Build model
     model = lb.build_model(config.model)
-    
+
     # Prepare dataset
     dataset = TextDataset(
         "data/training_data.txt",
         block_size=config.model.max_seq_length
     )
-    
+
     # Train model
     results = lb.train_model(model, dataset, config.training)
-    
+
     print(f"Training completed: {results.final_loss:.4f} final loss")
 
 if __name__ == "__main__":
     main()
 '''
-    
+
     script_path = project_dir / "train.py"
     with open(script_path, 'w') as f:
         f.write(script_content)

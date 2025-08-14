@@ -116,6 +116,7 @@ The documentation supports enhanced Markdown with:
 import llmbuilder as lb
 config = lb.load_config(preset="cpu_small")
 ```
+
 ```
 
 ### Tabs
@@ -161,16 +162,19 @@ To use a custom domain:
 ### Common Issues
 
 **Build Fails:**
+
 - Check for broken links in markdown files
 - Ensure all referenced files exist
 - Validate `mkdocs.yml` syntax
 
 **Missing Dependencies:**
+
 ```bash
 pip install -r docs/requirements.txt
 ```
 
 **Slow Build:**
+
 - Disable git plugin for faster builds during development
 - Use `mkdocs serve --dev-addr=127.0.0.1:8000` for development
 
@@ -187,6 +191,7 @@ To add Google Analytics:
 
 1. Get your GA tracking ID
 2. Add to `mkdocs.yml`:
+
 ```yaml
 extra:
   analytics:
@@ -214,4 +219,4 @@ To contribute to the documentation:
 
 ---
 
-For more information about MkDocs, visit: https://www.mkdocs.org/
+For more information about MkDocs, visit: <https://www.mkdocs.org/>

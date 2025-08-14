@@ -13,19 +13,19 @@ graph TB
     B --> D[ONNX Format]
     B --> E[Quantized Models]
     B --> F[HuggingFace Format]
-    
+
     C --> C1[llama.cpp]
     C --> C2[Ollama]
-    
+
     D --> D1[Mobile Apps]
     D --> D2[Edge Devices]
-    
+
     E --> E1[8-bit Models]
     E --> E2[4-bit Models]
-    
+
     F --> F1[Transformers]
     F --> F2[Model Hub]
-    
+
     style A fill:#e1f5fe
     style C1 fill:#e8f5e8
     style D1 fill:#fff3e0
@@ -118,6 +118,7 @@ exporter.export(
 ```
 
 **Quantization Options:**
+
 - `f16`: 16-bit floating point (best quality, larger size)
 - `q8_0`: 8-bit quantization (good quality, medium size)
 - `q4_0`: 4-bit quantization (lower quality, smallest size)
@@ -153,6 +154,7 @@ exporter.export(
 ```
 
 **ONNX Options:**
+
 - `opset_version`: ONNX operator set version (11, 13, 14)
 - `target`: Target device ("cpu", "gpu", "mobile")
 - `optimize`: Apply ONNX optimizations
@@ -222,21 +224,21 @@ config = ExportConfig(
     # Model settings
     max_seq_length=2048,        # Maximum sequence length
     vocab_size=32000,           # Vocabulary size
-    
+
     # Quantization settings
     quantization_method="dynamic",
     calibration_samples=1000,
     quantization_bits=8,
-    
+
     # Optimization settings
     optimize_for_inference=True,
     remove_unused_weights=True,
     fuse_operations=True,
-    
+
     # Memory settings
     memory_efficient=True,
     low_cpu_mem_usage=True,
-    
+
     # Metadata
     model_name="MyLLM",
     model_description="Custom language model",
@@ -506,24 +508,28 @@ export_config = ExportConfig(
 ## 📚 Best Practices
 
 ### 1. Choose the Right Format
+
 - **GGUF**: CPU inference, llama.cpp compatibility
 - **ONNX**: Cross-platform, mobile deployment
 - **Quantized PyTorch**: PyTorch ecosystem, balanced performance
 - **HuggingFace**: Easy sharing, transformers compatibility
 
 ### 2. Quantization Strategy
+
 - Start with dynamic quantization for quick wins
 - Use static quantization for better quality
 - Consider QAT for maximum quality retention
 - Test different bit widths (4, 8, 16)
 
 ### 3. Validation and Testing
+
 - Always validate exported models
 - Test on representative data
 - Benchmark performance vs. quality trade-offs
 - Verify compatibility with target deployment
 
 ### 4. Deployment Considerations
+
 - Consider target hardware capabilities
 - Plan for model updates and versioning
 - Monitor inference performance in production

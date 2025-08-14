@@ -5,49 +5,51 @@ This module provides common utilities including logging, checkpoint management,
 device management, and other helper functions.
 """
 
-# Import utility modules
-from .logger import (
-    LLMBuilderLogger,
-    setup_logging,
-    get_logger,
-    log_config,
-    log_system_info,
-)
 from .checkpoint import (
     CheckpointManager,
-    save_checkpoint,
-    load_checkpoint,
-    list_checkpoints,
     get_best_checkpoint,
     get_latest_checkpoint,
+    list_checkpoints,
+    load_checkpoint,
+    save_checkpoint,
 )
 from .device import (
     DeviceManager,
-    get_optimal_device,
-    get_device_info,
-    get_memory_info,
+    check_memory_requirements,
     clear_memory,
     estimate_model_memory,
-    check_memory_requirements,
+    get_device_info,
+    get_memory_info,
+    get_optimal_device,
     get_optimization_recommendations,
     validate_device_compatibility,
 )
+
+# Import utility modules
+from .logger import (
+    LLMBuilderLogger,
+    get_logger,
+    log_config,
+    log_system_info,
+    setup_logging,
+)
+
 
 # Custom exception hierarchy
 class LLMBuilderError(Exception):
     """
     Base exception for llmbuilder package.
-    
+
     All custom exceptions in the package inherit from this base class.
     Provides common functionality for error handling and logging.
     """
-    
+
     def __init__(self, message: str, details: dict = None, cause: Exception = None):
         super().__init__(message)
         self.message = message
         self.details = details or {}
         self.cause = cause
-    
+
     def __str__(self) -> str:
         """Return formatted error message."""
         msg = self.message
@@ -57,21 +59,23 @@ class LLMBuilderError(Exception):
         if self.cause:
             msg += f" (Caused by: {self.cause})"
         return msg
-    
+
     def to_dict(self) -> dict:
         """Convert exception to dictionary for logging."""
         return {
             "error_type": self.__class__.__name__,
             "message": self.message,
             "details": self.details,
-            "cause": str(self.cause) if self.cause else None
+            "cause": str(self.cause) if self.cause else None,
         }
 
 
 class ConfigurationError(LLMBuilderError):
     """Configuration related errors."""
-    
-    def __init__(self, message: str, config_path: str = None, invalid_keys: list = None, **kwargs):
+
+    def __init__(
+        self, message: str, config_path: str = None, invalid_keys: list = None, **kwargs
+    ):
         details = {}
         if config_path:
             details["config_path"] = config_path
@@ -82,8 +86,10 @@ class ConfigurationError(LLMBuilderError):
 
 class DataError(LLMBuilderError):
     """Data loading and processing errors."""
-    
-    def __init__(self, message: str, file_path: str = None, data_format: str = None, **kwargs):
+
+    def __init__(
+        self, message: str, file_path: str = None, data_format: str = None, **kwargs
+    ):
         details = {}
         if file_path:
             details["file_path"] = file_path
@@ -94,8 +100,10 @@ class DataError(LLMBuilderError):
 
 class TokenizerError(LLMBuilderError):
     """Tokenizer training and loading errors."""
-    
-    def __init__(self, message: str, tokenizer_path: str = None, vocab_size: int = None, **kwargs):
+
+    def __init__(
+        self, message: str, tokenizer_path: str = None, vocab_size: int = None, **kwargs
+    ):
         details = {}
         if tokenizer_path:
             details["tokenizer_path"] = tokenizer_path
@@ -106,8 +114,10 @@ class TokenizerError(LLMBuilderError):
 
 class ModelError(LLMBuilderError):
     """Model creation and loading errors."""
-    
-    def __init__(self, message: str, model_path: str = None, architecture: str = None, **kwargs):
+
+    def __init__(
+        self, message: str, model_path: str = None, architecture: str = None, **kwargs
+    ):
         details = {}
         if model_path:
             details["model_path"] = model_path
@@ -118,8 +128,15 @@ class ModelError(LLMBuilderError):
 
 class TrainingError(LLMBuilderError):
     """Training and fine-tuning errors."""
-    
-    def __init__(self, message: str, epoch: int = None, step: int = None, loss: float = None, **kwargs):
+
+    def __init__(
+        self,
+        message: str,
+        epoch: int = None,
+        step: int = None,
+        loss: float = None,
+        **kwargs,
+    ):
         details = {}
         if epoch is not None:
             details["epoch"] = epoch
@@ -132,8 +149,10 @@ class TrainingError(LLMBuilderError):
 
 class InferenceError(LLMBuilderError):
     """Text generation and inference errors."""
-    
-    def __init__(self, message: str, model_name: str = None, prompt_length: int = None, **kwargs):
+
+    def __init__(
+        self, message: str, model_name: str = None, prompt_length: int = None, **kwargs
+    ):
         details = {}
         if model_name:
             details["model_name"] = model_name
@@ -144,8 +163,10 @@ class InferenceError(LLMBuilderError):
 
 class ExportError(LLMBuilderError):
     """Model export and conversion errors."""
-    
-    def __init__(self, message: str, export_format: str = None, output_path: str = None, **kwargs):
+
+    def __init__(
+        self, message: str, export_format: str = None, output_path: str = None, **kwargs
+    ):
         details = {}
         if export_format:
             details["export_format"] = export_format
@@ -156,8 +177,10 @@ class ExportError(LLMBuilderError):
 
 class CheckpointError(LLMBuilderError):
     """Checkpoint saving and loading errors."""
-    
-    def __init__(self, message: str, checkpoint_path: str = None, operation: str = None, **kwargs):
+
+    def __init__(
+        self, message: str, checkpoint_path: str = None, operation: str = None, **kwargs
+    ):
         details = {}
         if checkpoint_path:
             details["checkpoint_path"] = checkpoint_path
@@ -168,8 +191,10 @@ class CheckpointError(LLMBuilderError):
 
 class DeviceError(LLMBuilderError):
     """Device and hardware related errors."""
-    
-    def __init__(self, message: str, device: str = None, available_devices: list = None, **kwargs):
+
+    def __init__(
+        self, message: str, device: str = None, available_devices: list = None, **kwargs
+    ):
         details = {}
         if device:
             details["device"] = device
@@ -177,26 +202,25 @@ class DeviceError(LLMBuilderError):
             details["available_devices"] = available_devices
         super().__init__(message, details, **kwargs)
 
+
 __all__ = [
     # Exceptions
     "LLMBuilderError",
     "ConfigurationError",
     "DataError",
     "TokenizerError",
-    "ModelError", 
+    "ModelError",
     "TrainingError",
     "InferenceError",
     "ExportError",
     "CheckpointError",
     "DeviceError",
-    
     # Logging utilities
     "LLMBuilderLogger",
     "setup_logging",
     "get_logger",
     "log_config",
     "log_system_info",
-    
     # Checkpoint management
     "CheckpointManager",
     "save_checkpoint",
@@ -204,7 +228,6 @@ __all__ = [
     "list_checkpoints",
     "get_best_checkpoint",
     "get_latest_checkpoint",
-    
     # Device management
     "DeviceManager",
     "get_optimal_device",

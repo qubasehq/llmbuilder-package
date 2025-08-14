@@ -5,11 +5,12 @@ This comprehensive tutorial will guide you through training your first language 
 ## 🎯 What We'll Build
 
 We'll create a small GPT-style language model that can:
+
 - Generate coherent text based on prompts
 - Complete sentences and paragraphs
 - Demonstrate understanding of the training data
 
-**Estimated time**: 30-60 minutes  
+**Estimated time**: 30-60 minutes
 **Requirements**: 4GB RAM, Python 3.8+
 
 ## 📋 Prerequisites
@@ -71,6 +72,7 @@ llmbuilder data load \
 ```
 
 This will:
+
 - Load PDF, DOCX, TXT files from `./documents`
 - Clean and normalize the text
 - Filter out short passages
@@ -442,16 +444,16 @@ llmbuilder train model --config model_config.json --device cuda
 4. **Hyperparameter tuning**: Adjust learning rate, batch size
 5. **Model architecture**: Try different sizes
 
-## 🎉 Congratulations!
+## 🎉 Congratulations
 
 You've successfully:
 
-✅ Prepared training data  
-✅ Configured a model  
-✅ Trained a tokenizer  
-✅ Trained a language model  
-✅ Generated text  
-✅ Evaluated performance  
+✅ Prepared training data
+✅ Configured a model
+✅ Trained a tokenizer
+✅ Trained a language model
+✅ Generated text
+✅ Evaluated performance
 
 ## 🚀 Next Steps
 

@@ -22,26 +22,26 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    
+
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.9'
-    
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r docs/requirements.txt
         # Try to install package, but continue if it fails (docs-only build)
         pip install -e . || echo "Package installation failed, continuing with docs-only build"
-    
+
     - name: Build documentation
       run: |
         echo "Building documentation..."
         mkdocs --version
         mkdocs build --clean --strict
         echo "Documentation build completed successfully"
-    
+
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:

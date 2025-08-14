@@ -22,6 +22,7 @@ llmbuilder welcome
 ```
 
 This interactive command guides you through:
+
 - Learning about LLMBuilder
 - Creating configuration files
 - Processing data
@@ -63,6 +64,7 @@ llmbuilder [GLOBAL_OPTIONS] COMMAND [COMMAND_OPTIONS] [ARGS]
 ### Information Commands
 
 #### `welcome`
+
 Interactive getting started experience:
 
 ```bash
@@ -70,12 +72,14 @@ llmbuilder welcome
 ```
 
 Features:
+
 - Guided setup process
 - Learn about LLMBuilder capabilities
 - Quick access to common tasks
 - Beginner-friendly explanations
 
 #### `info`
+
 Display package information and credits:
 
 ```bash
@@ -83,6 +87,7 @@ llmbuilder info
 ```
 
 Shows:
+
 - Package version and description
 - Available modules and their purposes
 - Quick command examples
@@ -91,6 +96,7 @@ Shows:
 ### Configuration Commands
 
 #### `config create`
+
 Create configuration files with presets:
 
 ```bash
@@ -104,6 +110,7 @@ llmbuilder config create --preset cpu_small --output config.json
 ```
 
 #### `config validate`
+
 Validate configuration files:
 
 ```bash
@@ -111,6 +118,7 @@ llmbuilder config validate config.json
 ```
 
 #### `config list`
+
 List available configuration presets:
 
 ```bash
@@ -120,6 +128,7 @@ llmbuilder config list
 ### Data Processing Commands
 
 #### `data load`
+
 Load and preprocess text data from various formats:
 
 ```bash
@@ -136,6 +145,7 @@ llmbuilder data load \
 ```
 
 #### `data tokenizer`
+
 Train tokenizers on text data:
 
 ```bash
@@ -149,6 +159,7 @@ llmbuilder data tokenizer \
 ### Training Commands
 
 #### `train model`
+
 Train language models from scratch:
 
 ```bash
@@ -166,6 +177,7 @@ llmbuilder train model \
 ```
 
 #### `train resume`
+
 Resume training from checkpoints:
 
 ```bash
@@ -178,6 +190,7 @@ llmbuilder train resume \
 ### Fine-tuning Commands
 
 #### `finetune model`
+
 Fine-tune pre-trained models:
 
 ```bash
@@ -193,6 +206,7 @@ llmbuilder finetune model \
 ### Generation Commands
 
 #### `generate text`
+
 Generate text with trained models:
 
 ```bash
@@ -217,6 +231,7 @@ llmbuilder generate text \
 ### Model Management Commands
 
 #### `model create`
+
 Create new model architectures:
 
 ```bash
@@ -229,6 +244,7 @@ llmbuilder model create \
 ```
 
 #### `model info`
+
 Display model information:
 
 ```bash
@@ -236,6 +252,7 @@ llmbuilder model info ./model/model.pt
 ```
 
 #### `model evaluate`
+
 Evaluate model performance:
 
 ```bash
@@ -248,6 +265,7 @@ llmbuilder model evaluate \
 ### Export Commands
 
 #### `export gguf`
+
 Export models to GGUF format:
 
 ```bash
@@ -258,6 +276,7 @@ llmbuilder export gguf \
 ```
 
 #### `export onnx`
+
 Export models to ONNX format:
 
 ```bash
@@ -268,6 +287,7 @@ llmbuilder export onnx \
 ```
 
 #### `export quantize`
+
 Quantize models for deployment:
 
 ```bash
@@ -410,24 +430,28 @@ echo "Training pipeline completed!"
 ### Common Error Messages
 
 #### Configuration Errors
+
 ```bash
 ❌ Configuration validation failed: num_heads (8) must divide embedding_dim (512)
 💡 Try: Set num_heads to 4, 8, or 16
 ```
 
 #### Data Errors
+
 ```bash
 ❌ No supported files found in directory: ./documents
 💡 Supported formats: .txt, .pdf, .docx, .html, .md
 ```
 
 #### Memory Errors
+
 ```bash
 ❌ CUDA out of memory
 💡 Try: Reduce batch size with --batch-size 4 or use CPU with --device cpu
 ```
 
 #### Model Errors
+
 ```bash
 ❌ Model file not found: ./model/model.pt
 💡 Check the model path or train a model first with: llmbuilder train model

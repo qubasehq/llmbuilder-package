@@ -9,9 +9,9 @@ from .finetune import (
     FineTuner,
     FineTuningConfig,
     LoRALayer,
-    finetune_model,
     create_lora_config,
     create_small_dataset_config,
+    finetune_model,
 )
 
 __all__ = [
@@ -19,10 +19,8 @@ __all__ = [
     "FineTuner",
     "FineTuningConfig",
     "LoRALayer",
-    
     # Fine-tuning API functions
     "finetune_model",
-    
     # Configuration helpers
     "create_lora_config",
     "create_small_dataset_config",

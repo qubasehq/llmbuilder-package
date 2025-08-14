@@ -14,7 +14,7 @@ graph LR
     D --> E[Predictions]
     E --> F[Detokenizer]
     F --> G["Generated text"]
-    
+
     style A fill:#e1f5fe
     style C fill:#fff3e0
     style G fill:#e8f5e8
@@ -50,6 +50,7 @@ trainer.train(
 ```
 
 **Advantages:**
+
 - Balances vocabulary size and coverage
 - Handles out-of-vocabulary words well
 - Works across multiple languages
@@ -71,6 +72,7 @@ config = TokenizerConfig(
 ```
 
 **Advantages:**
+
 - Probabilistically optimal vocabulary
 - Better handling of morphologically rich languages
 - Flexible subword boundaries
@@ -89,6 +91,7 @@ config = TokenizerConfig(
 ```
 
 **Use cases:**
+
 - Small, domain-specific datasets
 - Languages with clear word boundaries
 - When interpretability is important
@@ -106,6 +109,7 @@ config = TokenizerConfig(
 ```
 
 **Use cases:**
+
 - Very small datasets
 - Morphologically complex languages
 - When dealing with noisy text
@@ -157,17 +161,17 @@ config = TokenizerConfig(
     # Core settings
     vocab_size=16000,           # Vocabulary size
     model_type="bpe",           # Algorithm: bpe, unigram, word, char
-    
+
     # Text preprocessing
     lowercase=False,            # Convert to lowercase
     remove_accents=False,       # Remove accent marks
     normalize=True,             # Unicode normalization
-    
+
     # Coverage and quality
     character_coverage=1.0,     # Character coverage (0.0-1.0)
     max_sentence_length=4096,   # Maximum sentence length
     min_frequency=2,            # Minimum token frequency
-    
+
     # Special tokens
     unk_token="<unk>",         # Unknown token
     bos_token="<s>",           # Beginning of sequence
@@ -186,12 +190,12 @@ config = TokenizerConfig(
     split_digits=True,         # Split numbers into digits
     split_by_whitespace=True,  # Pre-tokenize by whitespace
     split_by_punctuation=True, # Pre-tokenize by punctuation
-    
+
     # Vocabulary control
     max_token_length=16,       # Maximum token length
     vocab_threshold=1e-6,      # Vocabulary pruning threshold
     shrinking_factor=0.75,     # Unigram shrinking factor
-    
+
     # Training control
     num_threads=8,             # Number of training threads
     seed=42,                   # Random seed
@@ -208,7 +212,7 @@ Special tokens serve specific purposes in language models:
 ```python
 special_tokens = {
     "<pad>": "Padding token for batch processing",
-    "<unk>": "Unknown/out-of-vocabulary token", 
+    "<unk>": "Unknown/out-of-vocabulary token",
     "<s>": "Beginning of sequence token",
     "</s>": "End of sequence token",
     "<mask>": "Masking token for masked language modeling"
@@ -295,7 +299,7 @@ test_texts = [
 for text in test_texts:
     tokens = tokenizer.encode(text)
     decoded = tokenizer.decode(tokens)
-    
+
     print(f"\nText: {text}")
     print(f"Tokens ({len(tokens)}): {tokens}")
     print(f"Decoded: {decoded}")
@@ -309,23 +313,23 @@ def analyze_compression(tokenizer, text_file):
     """Analyze tokenization compression."""
     with open(text_file, 'r', encoding='utf-8') as f:
         text = f.read()
-    
+
     # Character count
     char_count = len(text)
-    
+
     # Token count
     tokens = tokenizer.encode(text)
     token_count = len(tokens)
-    
+
     # Compression ratio
     compression_ratio = char_count / token_count
-    
+
     print(f"📊 Compression Analysis:")
     print(f"  Characters: {char_count:,}")
     print(f"  Tokens: {token_count:,}")
     print(f"  Compression ratio: {compression_ratio:.2f}")
     print(f"  Tokens per 1000 chars: {1000 / compression_ratio:.1f}")
-    
+
     return compression_ratio
 
 # Analyze compression
@@ -353,7 +357,7 @@ print(f"Decoded: {decoded_text}")
 
 # Encode with special tokens
 tokens_with_special = tokenizer.encode(
-    text, 
+    text,
     add_bos_token=True,  # Add beginning-of-sequence token
     add_eos_token=True   # Add end-of-sequence token
 )
@@ -604,18 +608,18 @@ tokens = tokenizer.encode_batch(texts, batch_size=1000)
 def validate_tokenizer(tokenizer, test_texts):
     """Validate tokenizer on test texts."""
     issues = []
-    
+
     for text in test_texts:
         tokens = tokenizer.encode(text)
         decoded = tokenizer.decode(tokens)
-        
+
         if text != decoded:
             issues.append({
                 'original': text,
                 'decoded': decoded,
                 'tokens': tokens
             })
-    
+
     if issues:
         print(f"⚠️  Found {len(issues)} reconstruction issues:")
         for issue in issues[:5]:  # Show first 5
@@ -624,7 +628,7 @@ def validate_tokenizer(tokenizer, test_texts):
             print()
     else:
         print("✅ All texts reconstructed perfectly!")
-    
+
     return len(issues) == 0
 
 # Test tokenizer
@@ -644,7 +648,7 @@ is_valid = validate_tokenizer(tokenizer, test_texts)
 ### 1. Vocabulary Size Selection
 
 - **Small datasets (< 1M tokens)**: 8K - 16K vocabulary
-- **Medium datasets (1M - 100M tokens)**: 16K - 32K vocabulary  
+- **Medium datasets (1M - 100M tokens)**: 16K - 32K vocabulary
 - **Large datasets (> 100M tokens)**: 32K - 64K vocabulary
 - **Multilingual**: 64K - 128K vocabulary
 

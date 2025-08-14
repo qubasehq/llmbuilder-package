@@ -5,33 +5,20 @@ This module provides comprehensive model building, loading, saving,
 and management capabilities for GPT-style transformer models.
 """
 
-from .gpt import (
-    GPTModel,
-    GPTModelMetadata,
-    MultiHeadAttention,
-    MLP,
-    TransformerBlock,
-)
-from .builder import (
-    ModelBuilder,
-    build_model,
-    load_model,
-    save_model,
-    validate_model,
-)
+from .builder import ModelBuilder, build_model, load_model, save_model, validate_model
+from .gpt import MLP, GPTModel, GPTModelMetadata, MultiHeadAttention, TransformerBlock
 
 __all__ = [
     # GPT Model components
     "GPTModel",
-    "GPTModelMetadata", 
+    "GPTModelMetadata",
     "MultiHeadAttention",
     "MLP",
     "TransformerBlock",
-    
     # Model builder and management
     "ModelBuilder",
     "build_model",
-    "load_model", 
+    "load_model",
     "save_model",
     "validate_model",
 ]
