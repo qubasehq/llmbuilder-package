@@ -89,6 +89,7 @@ nav:
     - Installation: getting-started/installation.md
     - Quick Start: getting-started/quickstart.md
     - First Model: getting-started/first-model.md
+    - CLI Guide: getting-started/CLI.md
   - User Guide:
     - Configuration: user-guide/configuration.md
     - Data Processing: user-guide/data-processing.md

@@ -354,7 +354,7 @@ mkdocs build --strict
 
 After setting up your development environment:
 
-1. **Read the contributing guide**: [CONTRIBUTING.md](../../CONTRIBUTING.md)
+1. **Read the contributing guide**: [Contributing Guide](../contributing/testing-guidelines.md)
 2. **Explore the codebase**: Start with `llmbuilder/__init__.py`
 3. **Run the examples**: Try `examples/basic_training.py`
 4. **Check existing issues**: Look for "good first issue" labels
